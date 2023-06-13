@@ -91,28 +91,33 @@ pm_text <- paste("(10) Peter Mckenna |", top_goal_kickers$total_goals[top_goal_k
 # Plot theme 
 # ------------------------
 
-# Theme for plots
+# Theme 
 theme_plot <-
-  theme(
-    plot.title = element_text(size = 11, hjust = 0, colour = "#4E4F4E", face = "bold"),
-    plot.subtitle = element_text(size = 10, hjust = 0, colour = "#4E4F4E"),
-    axis.title = element_text(size = 10, colour = "#4E4F4E"),
-    axis.text = element_text(size = 10, colour = "#4E4F4E"),
-    panel.background = element_rect(fill = "#fcffff",
-                                    colour = "#fcffff"),
-    plot.background = element_rect(fill = "#fcffff",
-                                   colour = "#fcffff"),
-    plot.margin = margin(5.5, 40, 5.5, 5.5), 
-    legend.position = "top",
-    legend.direction = "horizontal",
-    legend.title = element_text(colour = "#4E4F4E",
-                                size=10,
-                                face="bold"),
-    legend.margin = margin(grid::unit(0,"cm")),
-    legend.text = element_text(colour = "#4E4F4E",
-                               size = 10),
-    legend.key.height = grid::unit(0.8,"cm"),
-    legend.key.width = grid::unit(0.2,"cm")
+  theme(plot.margin = margin(5.5, 40, 5.5, 5.5), 
+        
+        axis.line.x = element_line(color="#d6d6d6", size = 0.2),
+        axis.line.y = element_line(color="#d6d6d6", size = 0.2),
+        
+        axis.title.y = element_text(color="#d6d6d6", size = 14),
+        axis.title.x = element_text(color="#d6d6d6", size = 14),
+        
+        axis.ticks.x =  element_line(color="#d6d6d6"),
+        axis.ticks.y =  element_line(color="#d6d6d6"),
+        
+        axis.text.y = element_text(color = "#d6d6d6", size = 12),
+        axis.text.x = element_text(color = "#d6d6d6", size = 12),
+        plot.caption = element_text(colour = "#d6d6d6"),
+        legend.key = element_rect(fill = "#ba001c"), # colour of legend line background 
+        # Plot margins / border / fill-colour 
+        panel.background = element_rect(fill = "#ba001c",
+                                        colour = "#ba001c"),
+        plot.background = element_rect(fill = "#ba001c",
+                                       colour = "#ba001c"),
+        panel.grid.major=element_line(colour="#ba001c"),
+        panel.grid.minor=element_line(colour="#ba001c"),
+        
+        panel.border = element_blank(),
+        legend.position = "none"
   )
 
 
@@ -121,7 +126,7 @@ theme_plot <-
 # ------------------------
 
 p <- 
-afl.top100 %>% 
+  afl.top100 %>% 
   ggplot(aes(y = total_goals, 
              x = match, 
              group = player_id)) + 
@@ -144,12 +149,12 @@ afl.top100 %>%
   
   scale_y_continuous(breaks = c(0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400)) +
   scale_x_continuous(breaks = c(0, 50, 100, 150, 200, 250, 300, 350, 400)) + # expand axis border 
-   
+  
   labs(x = "games played",
        y = "goals",
-       title = "Lance Franklin's rise to 4th on the all time goal kicking list",
-       subtitle = paste0("Measaured against <span style='color:", afl.colours["all time greats"], "'>all time greats</span>,
-               <span style='color:", afl.colours["historic greats"], "'>historic greats</span> & his closest
+       title = "Lance Franklin's ascent to 4th on the all time goal kicking list",
+       subtitle = paste0("Depicts the top 100 goal kickers with emphasis on <span style='color:", afl.colours["all time greats"], "'>the top 3 all-time goal kickers</span>,
+               <span style='color:", afl.colours["historic greats"], "'>historic greats</span> & Franklin's closest
                <span style='color:", afl.colours["peers"], "'>peers</span>"),
        caption = "*Current player") +
   
@@ -158,7 +163,8 @@ afl.top100 %>%
             x = 385, y = 1060,
             label = lf_text,
             hjust = "left", 
-            color = "#f2f2f2") +
+            color = "#f2f2f2",
+            size = 5) +
   geom_segment(geom = "segment",
                x = 355, y = 1060, 
                xend = 380, yend = 1060, 
@@ -168,7 +174,8 @@ afl.top100 %>%
             x = 385, y = 776,
             label = jr_text,
             hjust = "left", 
-            color = "#15ceeb") +
+            color = "#15ceeb",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 347, y = 776, 
                xend = 380, yend = 776, 
@@ -178,7 +185,8 @@ afl.top100 %>%
             x = 385, y = 749,
             label = th_text,
             hjust = "left", 
-            color = "#15ceeb") +
+            color = "#15ceeb",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 347, y = 749, 
                xend = 380, yend = 749, 
@@ -188,7 +196,8 @@ afl.top100 %>%
             x = 385, y = 1360,
             label = tl_text,
             hjust = "left", 
-            color = "#f7c779") +
+            color = "#f7c779",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 285, y = 1360, 
                xend = 380, yend = 1360, 
@@ -198,7 +207,8 @@ afl.top100 %>%
             x = 385, y = 1299,
             label = gc_text,
             hjust = "left", 
-            color = "#f7c779") +
+            color = "#f7c779",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 310, y = 1299, 
                xend = 380, yend = 1299, 
@@ -208,7 +218,8 @@ afl.top100 %>%
             x = 385, y = 1254,
             label = jd_text,
             hjust = "left", 
-            color = "#f7c779") +
+            color = "#f7c779",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 275, y = 1254, 
                xend = 380, yend = 1254, 
@@ -218,7 +229,8 @@ afl.top100 %>%
             x = 385, y = 817,
             label = bq_text,
             hjust = "left", 
-            color = "#ff9054") +
+            color = "#ff9054",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 370, y = 817, 
                xend = 380, yend = 817, 
@@ -228,7 +240,8 @@ afl.top100 %>%
             x = 385, y = 720,
             label = ph_text,
             hjust = "left", 
-            color = "#ff9054") +
+            color = "#ff9054",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 135, y = 720, 
                xend = 380, yend = 720, 
@@ -238,7 +251,8 @@ afl.top100 %>%
             x = 385, y = 537,
             label = jc_text,
             hjust = "left", 
-            color = "#ff9054") +
+            color = "#ff9054",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 103, y = 537, 
                xend = 380, yend = 537, 
@@ -248,55 +262,23 @@ afl.top100 %>%
             x = 385, y = 874,
             label = pm_text,
             hjust = "left", 
-            color = "#ff9054") +
+            color = "#ff9054",
+            size = 4) +
   geom_segment(geom = "segment",
                x = 195, y = 874, 
                xend = 380, yend = 874, 
                color = "#c9c0b1", linetype = 2, size = 0.1) +  
   
   theme_plot +
-  theme(axis.line.x = element_line(color="#d6d6d6", size = 0.2),
-        axis.line.y = element_line(color="#d6d6d6", size = 0.2),
-        
-        axis.title.y = element_text(color="#d6d6d6"),
-        axis.title.x = element_text(color="#d6d6d6"),
-        
-        axis.ticks.x =  element_line(color="#d6d6d6"),
-        axis.ticks.y =  element_line(color="#d6d6d6"),
-        
-        axis.text.y = element_text(color = "#d6d6d6"),
-        axis.text.x = element_text(color = "#d6d6d6"),
-
-        plot.title = element_markdown(lineheight = 1.1, 
+  theme(plot.title = element_markdown(lineheight = 1.1, 
                                       hjust = 0, 
-                                      size = 14, 
+                                      size = 16, 
                                       face = "bold", 
                                       colour = "#d6d6d6"),
-        legend.text = element_markdown(size = 11),
         plot.subtitle = element_markdown(colour = "#d6d6d6",
-                                     hjust = 0,
-                                     size = 12),
-        plot.caption = element_text(colour = "#d6d6d6"),
-        legend.key = element_rect(fill = "#ba001c"), # colour of legend line background 
-        # Plot margins / border / fill-colour 
-        panel.background = element_rect(fill = "#ba001c",
-                                        colour = "#ba001c"),
-        plot.background = element_rect(fill = "#ba001c",
-                                       colour = "#ba001c"),
-        panel.grid.major=element_line(colour="#ba001c"),
-        panel.grid.minor=element_line(colour="#ba001c"),
-
-        panel.border = element_blank(),
-        legend.position = "none"
+                                         hjust = 0,
+                                         size = 14)
   )
 
 # preview
 p
-
-# Save file 
-ggsave(p,
-       filename="afl-top-100.png",
-       height = 8.8,
-       width = 8.8,
-       units = "in",
-       dpi = 200)
